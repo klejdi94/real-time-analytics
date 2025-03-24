@@ -1,103 +1,151 @@
-# Real-time Analytics Dashboard
+# Real-Time Analytics Dashboard
 
 A real-time data processing pipeline and interactive dashboard for monitoring business metrics and generating insights, built with Go.
 
-## Features
+## 🚀 Features
 
-- **Data Engineering**: Collect and store event data from various sources
-- **Stream Processing**: Process incoming data in real-time to generate metrics
-- **Visualization**: Interactive dashboard with charts and tables
-- **Real-time Updates**: WebSocket connection for live data updates
+- **Real-time data ingestion** via RESTful API
+- **Streaming data processing** with metric calculations
+- **WebSocket communication** for instant dashboard updates
+- **Interactive visualizations** with Chart.js
+- **Modular architecture** for easy extension
 
-## Project Structure
+## 📋 Components
 
-```
-analytic-dashboard/
-├── cmd/
-│   └── server/         # Main application entry point
-├── pkg/
-│   ├── data/           # Data models and storage
-│   ├── processing/     # Data processing and metrics calculation
-│   └── visualization/  # WebSocket and visualization handling
-├── web/
-│   ├── static/         # Static assets (CSS, JS)
-│   └── templates/      # HTML templates
-└── go.mod              # Go module file
-```
+The application is structured into several key components:
 
-## Requirements
+- **Data Service**: Handles data storage and retrieval
+- **Processing Engine**: Computes metrics and analyzes incoming data
+- **Visualization Manager**: Manages WebSocket connections and real-time updates
+- **Web Dashboard**: Interactive UI with real-time charts and tables
+
+## 🔧 Technology Stack
+
+- **Backend**: Go (Golang)
+- **API Framework**: Gin Web Framework
+- **Real-time Communication**: WebSockets (gorilla/websocket)
+- **Frontend**: HTML, CSS, JavaScript
+- **Visualization**: Chart.js
+- **Data Processing**: Custom Go implementation
+
+## 📥 Installation
+
+### Prerequisites
 
 - Go 1.21 or higher
-- Modern web browser with JavaScript enabled
+- Git
 
-## Installation
+### Setup
 
-1. Install Go from [https://golang.org/dl/](https://golang.org/dl/)
+1. Clone the repository:
+```bash
+git clone https://github.com/klejdi94/real-time-analytics.git
+cd real-time-analytics
+```
 
-2. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/analytic-dashboard.git
-   cd analytic-dashboard
-   ```
+2. Install dependencies:
+```bash
+go mod download
+```
 
-3. Install dependencies:
-   ```bash
-   go mod download
-   ```
+3. Run the server:
+```bash
+go run cmd/server/main.go
+```
 
-## Running the Application
+4. Open your browser and navigate to:
+```
+http://localhost:8080
+```
 
-1. Start the server:
-   ```bash
-   go run cmd/server/main.go
-   ```
+## 🧪 Generating Test Data
 
-2. Open your browser and navigate to:
-   ```
-   http://localhost:8080
-   ```
+The project includes a data generator tool to populate the dashboard with sample metrics:
 
-## API Endpoints
+```bash
+# Generate 100 data points at 3-second intervals
+go run cmd/generator/main.go --count 100 --interval 3
 
-- `GET /`: Main dashboard interface
-- `POST /api/ingest`: Data ingestion endpoint
-- `GET /api/metrics`: Get current metrics
-- `GET /api/ws`: WebSocket connection for real-time updates
+# Generate an infinite stream of data
+go run cmd/generator/main.go
 
-## Data Ingestion
+# Send data in batches of 5
+go run cmd/generator/main.go --batch 5
+```
 
-To send data to the dashboard, make a POST request to the `/api/ingest` endpoint with JSON data in the following format:
+## 📊 Dashboard Usage
 
-```json
+The dashboard is divided into three main tabs:
+
+1. **Data Engineering**: Shows total events, event distribution, and recent data table
+2. **Stream Processing**: Displays time series data for sales and user metrics
+3. **Visualization**: Features region distribution, metrics comparison, and real-time metrics
+
+## 🏗️ Project Structure
+
+```
+├── cmd
+│   ├── generator        # Test data generator tool
+│   └── server           # Main application server
+├── pkg
+│   ├── data             # Data storage and management
+│   ├── processing       # Data processing and analysis
+│   └── visualization    # WebSocket and real-time updates
+└── web
+    ├── static           # Static assets (JS, CSS)
+    └── templates        # HTML templates
+```
+
+## 🚧 Extending the Dashboard
+
+### Adding a New Metric
+
+1. Define the metric in `pkg/processing/processor.go`
+2. Add visualization in the appropriate tab in `web/templates/index.html`
+3. Update the JavaScript handler in `web/static/js/dashboard.js`
+
+### Adding a New Data Type
+
+1. Extend the data model in `pkg/data/model.go`
+2. Add processing logic in `pkg/processing/processor.go`
+3. Update the visualization components as needed
+
+## 📄 API Reference
+
+### Data Ingestion
+
+```
+POST /api/ingest
+Content-Type: application/json
+
 {
-  "timestamp": "2023-03-15T12:34:56Z",
-  "source": "sales-system",
+  "timestamp": "2023-04-01T12:00:00Z",
+  "source": "web-app",
   "type": "sales",
   "values": {
-    "amount": 125,
-    "region": "Europe"
+    "amount": 150,
+    "units": 5,
+    "region": "North America"
   }
 }
 ```
 
-The `timestamp` field is optional. If not provided, the current time will be used.
+### Metrics Retrieval
 
-## Development
+```
+GET /api/metrics
+```
 
-### Adding New Data Types
+### WebSocket Connection
 
-1. Define the data structure in `pkg/data/data.go`
-2. Add processing logic in `pkg/processing/processor.go`
-3. Update the visualization in the frontend JavaScript
+```
+WS /api/ws
+```
 
-### Customizing the Dashboard
+## 🤝 Contributing
 
-The dashboard UI can be customized by modifying the HTML, CSS, and JavaScript files in the `web` directory:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- `web/templates/index.html`: Main dashboard layout
-- `web/static/css/styles.css`: Styling and layout
-- `web/static/js/dashboard.js`: Dashboard functionality and charts
+## 📝 License
 
-## License
-
-MIT 
+This project is licensed under the MIT License - see the LICENSE file for details. 
