@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/user/analytic-dashboard/pkg/data"
+	"github.com/klejdi94/real-time-analytics/pkg/data"
 )
 
 var (
@@ -70,19 +70,19 @@ func main() {
 // generateRandomPayload creates a random data payload
 func generateRandomPayload() data.Payload {
 	now := time.Now()
-	
+
 	// Randomly choose between sales and users events
 	eventTypes := []string{"sales", "users"}
 	eventType := eventTypes[rand.Intn(len(eventTypes))]
-	
+
 	// Randomly choose a region
 	regions := []string{"North America", "Europe", "Asia", "South America", "Africa", "Oceania"}
 	region := regions[rand.Intn(len(regions))]
-	
+
 	// Create values based on event type
 	values := make(map[string]interface{})
 	values["region"] = region
-	
+
 	if eventType == "sales" {
 		// Generate a random sales amount between 50 and 500
 		values["amount"] = 50 + rand.Intn(450)
@@ -94,7 +94,7 @@ func generateRandomPayload() data.Payload {
 		values["new"] = 10 + rand.Intn(90)
 		values["returning"] = 50 + rand.Intn(200)
 	}
-	
+
 	// Create the payload
 	return data.Payload{
 		Timestamp: now,
@@ -112,35 +112,35 @@ func sendBatch(batch []data.Payload) error {
 		if err != nil {
 			return fmt.Errorf("error marshaling JSON: %v", err)
 		}
-		
+
 		resp, err := http.Post(*endpoint, "application/json", bytes.NewBuffer(jsonData))
 		if err != nil {
 			return fmt.Errorf("error sending request: %v", err)
 		}
 		defer resp.Body.Close()
-		
+
 		if resp.StatusCode != http.StatusOK {
 			return fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 		}
-		
+
 		return nil
 	}
-	
+
 	// For multiple items, send as an array
 	jsonData, err := json.Marshal(batch)
 	if err != nil {
 		return fmt.Errorf("error marshaling JSON: %v", err)
 	}
-	
+
 	resp, err := http.Post(*endpoint+"/batch", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		return fmt.Errorf("error sending request: %v", err)
 	}
 	defer resp.Body.Close()
-	
+
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
-	
+
 	return nil
-} 
+}

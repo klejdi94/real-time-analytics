@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/user/analytic-dashboard/pkg/data"
-	"github.com/user/analytic-dashboard/pkg/processing"
-	"github.com/user/analytic-dashboard/pkg/visualization"
+	"github.com/klejdi94/real-time-analytics/pkg/data"
+	"github.com/klejdi94/real-time-analytics/pkg/processing"
+	"github.com/klejdi94/real-time-analytics/pkg/visualization"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module github.com/user/analytic-dashboard
+module github.com/klejdi94/real-time-analytics
 
 go 1.21
 

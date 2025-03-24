@@ -8,17 +8,17 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/user/analytic-dashboard/pkg/processing"
+	"github.com/klejdi94/real-time-analytics/pkg/processing"
 )
 
 // Manager handles visualization and WebSocket connections
 type Manager struct {
-	clients      map[*Client]bool
-	register     chan *Client
-	unregister   chan *Client
-	broadcast    chan []byte
-	upgrader     websocket.Upgrader
-	mu           sync.Mutex
+	clients    map[*Client]bool
+	register   chan *Client
+	unregister chan *Client
+	broadcast  chan []byte
+	upgrader   websocket.Upgrader
+	mu         sync.Mutex
 }
 
 // Client represents a WebSocket client connection
@@ -171,4 +171,4 @@ func (c *Client) writePump() {
 			}
 		}
 	}
-} 
+}
