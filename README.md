@@ -2,6 +2,10 @@
 
 A real-time data processing pipeline and interactive dashboard for monitoring business metrics and generating insights, built with Go.
 
+
+![real-time-analytics-dashboard](https://github.com/user-attachments/assets/ae93b047-bc86-475a-b88a-088fd44ff693)
+
+
 ## 🚀 Features
 
 - **Real-time data ingestion** via RESTful API
