@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0/dist/chartjs-adapter-luxon.min.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Real-time Analytics Dashboard</h1>
+            <div class="connection-status">
+                <span id="status-indicator"></span>
+                <span id="status-text">Connecting...</span>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="data-engineering">Data Engineering</button>
+            <button class="tab-button" data-tab="stream-processing">Stream Processing</button>
+            <button class="tab-button" data-tab="visualization">Visualization</button>
+        </nav>
+
+        <main class="dashboard-content">
+            <!-- Data Engineering Tab -->
+            <section id="data-engineering" class="tab-content active">
+                <div class="metric-cards">
+                    <div class="card">
+                        <h3>Total Events</h3>
+                        <div class="card-value" id="total-events">0</div>
+                    </div>
+                    <div class="card">
+                        <h3>Events By Type</h3>
+                        <div class="card-chart">
+                            <canvas id="events-by-type-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-table-container">
+                    <h3>Recent Data</h3>
+                    <table class="data-table" id="recent-data-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Key</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Stream Processing Tab -->
+            <section id="stream-processing" class="tab-content">
+                <div class="metric-cards">
+                    <div class="card full-width">
+                        <h3>Sales Time Series</h3>
+                        <div class="card-chart">
+                            <canvas id="sales-time-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-cards">
+                    <div class="card full-width">
+                        <h3>Users Time Series</h3>
+                        <div class="card-chart">
+                            <canvas id="users-time-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualization Tab -->
+            <section id="visualization" class="tab-content">
+                <div class="metric-cards">
+                    <div class="card">
+                        <h3>Region Distribution</h3>
+                        <div class="card-chart">
+                            <canvas id="region-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Metrics Comparison</h3>
+                        <div class="card-chart">
+                            <canvas id="metrics-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h3>Real-time Metrics</h3>
+                    <div class="real-time-container" id="real-time-metrics">
+                        <!-- Real-time metrics will be added here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html> 
